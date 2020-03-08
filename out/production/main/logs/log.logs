@@ -1,0 +1,15 @@
+03/03/2020 19:22:57 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Before navigating to: 'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:00 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Navigated to:'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:00 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Before navigating to: 'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:00 | Status: INFO | ClassName: Parallel tests for SMOKE in Linux FF browser | Log text: -- MainPage functionsl test starts --
+03/03/2020 19:23:00 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Trying to find Element By : By.xpath: /html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li
+03/03/2020 19:23:00 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Navigated to:'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:00 | Status: INFO | ClassName: Parallel tests for SMOKE in Windows Chrome browser | Log text: -- MainPage menu smoke test starts --
+03/03/2020 19:23:00 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Trying to find Element By : By.xpath: /html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li
+03/03/2020 19:23:21 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Found Element By : By.xpath: /html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li
+03/03/2020 19:23:21 | Status: INFO | ClassName: Parallel tests for SMOKE in Linux FF browser | Log text: [Closing session]
+03/03/2020 19:23:41 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Found Element By : By.xpath: /html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li
+03/03/2020 19:23:41 | Status: INFO | ClassName: Parallel tests for SMOKE in Windows Chrome browser | Log text: [Closing session]
+03/03/2020 19:23:55 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Before navigating to: 'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:57 | Status: DEBUG | ClassName: utils.WebEventListener | Log text: Navigated to:'https://www.airbnb.com/?locale=en'
+03/03/2020 19:23:57 | Status: INFO | ClassName: Parallel tests for SMOKE in Windows Chrome browser | Log text: [Closing session]
