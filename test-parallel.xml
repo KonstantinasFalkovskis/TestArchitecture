@@ -8,6 +8,8 @@
 		  <parameter name="platform" value ="WINDOWS"></parameter>
 		  <parameter name="browserName" value ="chrome"></parameter>
 		  <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
+		  <parameter name="host" value ="192.168.0.106"></parameter>
+		  <parameter name="port" value ="4444"></parameter>
    <groups>
 	<define name="all">
 		<include name="mainPageSmoke"></include>
@@ -25,6 +27,8 @@
 		  <parameter name="platform" value ="LINUX"></parameter>
 	      <parameter name="browserName" value ="firefox"></parameter>
 	      <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
+		  <parameter name="host" value ="192.168.0.106"></parameter>
+		  <parameter name="port" value ="4444"></parameter>
      <groups>
 	<define name="all">
 		<include name="mainPageFunc"></include>

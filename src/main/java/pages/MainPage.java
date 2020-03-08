@@ -1,8 +1,6 @@
 package pages;
 
 import java.util.List;
-
-//import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,8 +16,6 @@ import io.qameta.allure.Step;
 import utils.ClickUtils;
 
 public class MainPage extends Base{
-	
-	//Logger log = Logger.getLogger(MainPage.class.getName());
 	
 	LanguagePage langPage = new LanguagePage();
 	ClickUtils clickUtils = new ClickUtils();
@@ -144,7 +140,6 @@ public class MainPage extends Base{
 		List<WebElement> menuArr = driver.findElements(By.xpath("/html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li"));
 		for(WebElement element : menuArr) {
 			if(element.isDisplayed()) {
-				log.info(element.getText() + " - is visible on Main Page");
 				System.out.println(element.getText() + " - is visible on Main Page");
 			}
 		}
@@ -154,19 +149,14 @@ public class MainPage extends Base{
 	@Description("Method for stay places search smoke test. All elements in search module shall be visible.")
 	public void searchSmoke() {
 		Assert.assertTrue(placeToGo.isDisplayed());
-//		log.info(placeToGo.getText() + " - is visible");
 		System.out.println(placeToGo.getText() + " - is visible");
 		Assert.assertTrue(checkinInputField.isDisplayed());
-//		log.info(checkinInputField.getText() + " - is visible");
 		System.out.println(checkinInputField.getText() + " - is visible");
 		Assert.assertTrue(checkoutInputField.isDisplayed());
-//		log.info(checkoutInputField.getText() + " - is visible");
 		System.out.println(checkoutInputField.getText() + " - is visible");
 		Assert.assertTrue(guestPicker.isDisplayed());
-//		log.info(guestPicker.getText() + " - is visible");
 		System.out.println(guestPicker.getText() + " - is visible");
 		Assert.assertTrue(searchBtn.isDisplayed());
-//		log.info(searchBtn.getText() + " - is visible");
 		System.out.println(searchBtn.getText() + " - is visible");
 	}
 
@@ -178,34 +168,26 @@ public class MainPage extends Base{
 			WebElement element = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/header/div/div/div[3]/div/div/nav/ul/li[" + index +"]"));
 			if(index <= 2) {
 				element.click();
-				log.info(element.getText() + " - menu element is clickable");
 				System.out.println(element.getText() + " - menu element is clickable");
 				closeBtn.click();
-				log.info("Close is clicked. Window is closed.");
 				System.out.println("Close button is clicked. Window is closed.");
 			} else if(3 <= index && index <= 4) {
 					element.click();
-//					log.info(element.getText() + " - menu element is clickable");
-//					System.out.println(element.getText() + " - menu element is clickable");
-//					new WebDriverWait(driver, Util.IMPLICIT_WAIT).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(getStarted));
+					//System.out.println(element.getText() + " - menu element is clickable");
+					//new WebDriverWait(driver, Util.IMPLICIT_WAIT).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(getStarted));
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("window.history.go(-1)");
 					//driver.navigate().back();
-//					log.info(element.getText() + " - is closed.");
-//					System.out.println(element.getText() + " - is closed.");
+					//System.out.println(element.getText() + " - is closed.");
 			} else if(index == 5) {
 				element.click();
-				log.info(element.getText() + " - menu element is clickable");
 				System.out.println(element.getText() + " - menu element is clickable");
 				helpCloseBtn.click();
-				log.info("Close is clicked. Window is closed.");
 				System.out.println("Close button is clicked. Window is closed.");
 			} else if(index > 5) {
 				element.click();
-				log.info(element.getText() + " - menu element is clickable");
 				System.out.println(element.getText() + " - menu element is clickable");
 				closeBtnForLogin.click();
-				log.info("Close is clicked. Window is closed.");
 				System.out.println("Close button is clicked. Window is closed.");
 			}
 		}
@@ -312,12 +294,8 @@ public class MainPage extends Base{
 		for (WebElement element : articlesArr) {
 			if(element.getText().equals(article)) {
 				element.click();
-				log.debug(article + " -> is clickable");
 				Assert.assertEquals(articleHeader.getText(), article);
-				log.info(article + " - is visible");
 			}
 		}
 	}
-
-	
 }

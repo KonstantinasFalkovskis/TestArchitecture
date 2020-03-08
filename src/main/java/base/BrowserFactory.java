@@ -17,25 +17,22 @@ import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserFactory {
-	
-		
+
+	private static final String AUTOMATE_KEY = "";
+	private static final String USERNAME = "";
+
 	public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<WebDriver>();
 	//public static RemoteWebDriver rdriver = null;
-	
 	String browserName;
-	
 	public BrowserFactory(String browserName) {
 		this.browserName = browserName.toLowerCase();
 	}
-	
 	public static synchronized WebDriver getDriver() {
 		return tdriver.get();
 	}
-	
 
 		public WebDriver initialization(String browserName) {
 			System.out.println("Starting " + browserName + " locally");
@@ -47,31 +44,35 @@ public class BrowserFactory {
 			} else if (browserName.equals("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
 					tdriver.set(new FirefoxDriver());
-//					System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
-//					tdriver.set(new FirefoxDriver());
+					//System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+					//tdriver.set(new FirefoxDriver());
 					} else if(browserName.equalsIgnoreCase("opera")) {
 						WebDriverManager.operadriver().setup();
 						tdriver.set(new OperaDriver());
 							} else {
 							WebDriverManager.iedriver().setup();	
 							tdriver.set(new InternetExplorerDriver());
-						} 
-			
-
-			
-//				driver.set(Base.driver);
-//				return getDriver();
+						}
+				//driver.set(Base.driver);
+				//return getDriver();
 			return tdriver.get();
-			
 		}
-		
-//		public WebDriver parallelRun(String platform, String browserName, String version) throws MalformedURLException {
 
-		public WebDriver parallelRun(String platform, String browserName) throws MalformedURLException {
+		public WebDriver parallelRun(String environment, String platform, String browserName, String url, String host, String port) throws MalformedURLException {
 
-			String hubURLWin = "http://192.168.0.161:4444/wd/hub";
-			String hubURLMac = "http://192.168.0.129:4444/wd/hub";
-			String hubURLLinux = "http://192.168.0.106:4444/wd/hub";
+			//String hubURLWin = "http://192.168.0.161:4444/wd/hub";
+			//String hubURLMac = "http://192.168.0.129:4444/wd/hub";
+			//String hubURLLinux = "http://192.168.0.106:4444/wd/hub";
+
+			String remoteUrl;
+			if (host.contains("browserstack") || host.contains("sauce")
+					|| host.contains("testingbot")) {
+				remoteUrl = "http://" + USERNAME + ":" + AUTOMATE_KEY + "@"
+						+ host + ":" + port + "/wd/hub";
+			} else {
+				remoteUrl = "http://" + host + ":" + port + "/wd/hub";
+			}
+
 			DesiredCapabilities caps = new DesiredCapabilities();
 			System.out.println("Starting " + browserName + " on grid");
 			
@@ -139,13 +140,14 @@ public class BrowserFactory {
 
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLWin), caps));
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLMac), caps));
-				tdriver.set(new RemoteWebDriver(new URL(hubURLLinux), caps));
+				tdriver.set(new RemoteWebDriver(new URL(remoteUrl), caps));
+				// set local file detector for uploading file
+				//tdriver.setFileDetector(new LocalFileDetector());
+				//return tdriver.get();
 
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
-
 			return tdriver.get();
-		}
-
+	}
 }
