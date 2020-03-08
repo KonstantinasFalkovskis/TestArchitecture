@@ -12,9 +12,10 @@ ADD target/Airbnb-java-selenium-testng-build-sources.jar 	Airbnb-java-selenium-t
 ADD target/Airbnb-java-selenium-testng-build-tests.jar 	    Airbnb-java-selenium-testng-build-tests.jar
 ADD target/libs						                    	libs
 
-# in case of any other dependency like .csv / .json / .xls
+# in case of any other dependency like .csv / .json / .xls / .properties
 # please ADD that as well
-ADD src/main/java/data/data.xlsx    data.xlsx
+ADD src/main/java/data/data.xlsx              data.xlsx
+ADD src/main/java/config/config.properties    config.properties
 
 # ADD suite files
 ADD test-functional.xml				test-functional.xml
