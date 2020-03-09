@@ -15,7 +15,6 @@ ADD target/libs						                    	libs
 # in case of any other dependency like .csv / .json / .xls / .properties
 # please ADD that as well
 ADD src/main/java/data/data.xlsx              data.xlsx
-ADD src/main/java/config/config.properties    config.properties
 
 # ADD suite files
 ADD test-functional.xml				test-functional.xml
@@ -30,4 +29,5 @@ ADD healthcheck.sh                  healthcheck.sh
 # HUB_HOST
 # MODULE
 
-ENTRYPOINT sh healthcheck.sh
+#ENTRYPOINT sh healthcheck.sh
+ENTRYPOINT java -cp Airbnb-java-selenium-testng-build.jar:Airbnb-java-selenium-testng-build-sources.jar:Airbnb-java-selenium-testng-build-tests.jar:libs/* org.testng.TestNG $MODULE

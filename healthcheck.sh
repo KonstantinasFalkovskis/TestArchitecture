@@ -24,4 +24,4 @@ Airbnb-java-selenium-testng-build-tests.jar:libs/* \
    # -Denvironment=$environment \  #need to investigate is Local testing needed or not. If not remove ENV -param
    # -Dplatfrom=$platform \  #needed if another mashines - slaves are using in testing
    # -DbrowserName=$browserName \
-    org.testng.TestNG $module
+    org.testng.TestNG $MODULE

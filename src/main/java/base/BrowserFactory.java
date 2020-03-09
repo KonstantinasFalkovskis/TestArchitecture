@@ -21,8 +21,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserFactory {
 
-	private static final String AUTOMATE_KEY = "";
-	private static final String USERNAME = "";
+//	private static final String AUTOMATE_KEY = "";
+//	private static final String USERNAME = "";
 
 	public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<WebDriver>();
 	//public static RemoteWebDriver rdriver = null;
@@ -58,20 +58,21 @@ public class BrowserFactory {
 			return tdriver.get();
 		}
 
-		public WebDriver parallelRun(String environment, String platform, String browserName, String url, String host, String port) throws MalformedURLException {
+	    public WebDriver parallelRun(String environment, String platform, String browserName, String url) throws MalformedURLException {
+		//public WebDriver parallelRun(String environment, String platform, String browserName, String url) throws MalformedURLException {
 
 			//String hubURLWin = "http://192.168.0.161:4444/wd/hub";
 			//String hubURLMac = "http://192.168.0.129:4444/wd/hub";
-			//String hubURLLinux = "http://192.168.0.106:4444/wd/hub";
+			String hubURLLinux = "http://192.168.0.106:4444/wd/hub";
 
-			String remoteUrl;
-			if (host.contains("browserstack") || host.contains("sauce")
-					|| host.contains("testingbot")) {
-				remoteUrl = "http://" + USERNAME + ":" + AUTOMATE_KEY + "@"
-						+ host + ":" + port + "/wd/hub";
-			} else {
-				remoteUrl = "http://" + host + ":" + port + "/wd/hub";
-			}
+//			String remoteUrl;
+//			if (host.contains("browserstack") || host.contains("sauce")
+//					|| host.contains("testingbot")) {
+//				remoteUrl = "http://" + USERNAME + ":" + AUTOMATE_KEY + "@"
+//						+ host + ":" + port + "/wd/hub";
+//			} else {
+//				remoteUrl = "http://" + host + ":" + port + "/wd/hub";
+//			}
 
 			DesiredCapabilities caps = new DesiredCapabilities();
 			System.out.println("Starting " + browserName + " on grid");
@@ -118,29 +119,31 @@ public class BrowserFactory {
 			//caps.setVersion(version);
 
 			//Headless options
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			//options.addArguments("windows-size=1024,800");
-			//options.addArguments("enable-automation");
-			options.addArguments("start-maximized");
-			options.addArguments("disable-popup-blocking");
-			options.addArguments("disable-default-apps"); 
-			options.addArguments("--no-sandbox");
-			options.addArguments("ignore-certificate-errors");
-			options.merge(caps);
-			
-			FirefoxBinary ffbin = new FirefoxBinary();
-			ffbin.addCommandLineOptions("--headless");
-			FirefoxOptions ffoptions = new FirefoxOptions();
-			ffoptions.setBinary(ffbin);
-			ffoptions.merge(caps);
+//			ChromeOptions options = new ChromeOptions();
+//			options.addArguments("--headless");
+//			//options.addArguments("windows-size=1024,800");
+//			//options.addArguments("enable-automation");
+//			options.addArguments("start-maximized");
+//			options.addArguments("disable-popup-blocking");
+//			options.addArguments("disable-default-apps");
+//			options.addArguments("--no-sandbox");
+//			options.addArguments("ignore-certificate-errors");
+//			options.merge(caps);
+//
+//			FirefoxBinary ffbin = new FirefoxBinary();
+//			ffbin.addCommandLineOptions("--headless");
+//			FirefoxOptions ffoptions = new FirefoxOptions();
+//			ffoptions.setBinary(ffbin);
+//			ffoptions.merge(caps);
 			
 		
 			try {
 
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLWin), caps));
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLMac), caps));
-				tdriver.set(new RemoteWebDriver(new URL(remoteUrl), caps));
+				tdriver.set(new RemoteWebDriver(new URL(hubURLLinux), caps));
+				//tdriver.set(new RemoteWebDriver(new URL(remoteUrl), caps));
+
 				// set local file detector for uploading file
 				//tdriver.setFileDetector(new LocalFileDetector());
 				//return tdriver.get();

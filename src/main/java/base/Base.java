@@ -7,8 +7,6 @@ import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-//import org.apache.log4j.LogManager;
-//import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,31 +26,28 @@ public class Base {
 	public WebDriverWait wait;
 	public EventFiringWebDriver e_driver;
 	public WebEventListener eventListener;
-	//public Logger log;
 	
 	public Base() {
-		try {
-			prop = new Properties();
-					FileInputStream file = new FileInputStream(System.getProperty("user.dir")
-					+ "/src/main/java/config/config.properties");
-			prop.load(file);
-		} catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			prop = new Properties();
+//					FileInputStream file = new FileInputStream(System.getProperty("user.dir")
+//					+ "/src/main/java/config/config.properties");
+//			prop.load(file);
+//		} catch(FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@BeforeMethod(alwaysRun = true)
-	@Parameters({"environment","platform","browserName","url", "host", "port"})
-	public void selectRunningSource(@Optional("local") String environment, @Optional("ANY") String platform,
-									@Optional("chrome") String browserName, String url,
-									@Optional("192.168.0.106") String host,
-									@Optional("4444") String port, ITestContext ctx) throws MalformedURLException {
+	@Parameters({"environment","platform","browserName","url"})
+	//@Parameters({"environment","platform","browserName","url"})
+	public void selectRunningSource(@Optional("local") String environment, @Optional("ANY") String platform, @Optional("chrome") String browserName, String url, ITestContext ctx) throws MalformedURLException {
 		
 		BrowserFactory factory = new BrowserFactory(browserName);
 		if(environment.equals("grid")) {
-				driver = factory.parallelRun(environment,platform,browserName,url,host,port);
+				driver = factory.parallelRun(environment,platform,browserName,url);
 		} else {
 				driver = factory.initialization(browserName);
 		}
@@ -67,13 +62,11 @@ public class Base {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(Util.PAGE_LOAD_WAIT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Util.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		
-		//driver.get(prop.getProperty("url"));
+
 		driver.get(url);
 		
 		setCurrentThreadName();
 		String testName = ctx.getCurrentXmlTest().getName();
-		//log = LogManager.getLogger(testName);
 	}
 	
 	private void setCurrentThreadName() {
@@ -89,14 +82,10 @@ public class Base {
 	@AfterMethod(alwaysRun = true)
 	protected void tearDown() {
 		try {
-		//	log.info("[Closing session]");
 			System.out.println("[Closing session]");
 			driver.quit();
 		} catch(Exception e) {
-			//log.info(e);
 			System.out.println("ERROR: " + e);
 		}
 	}
-	
-	
 }

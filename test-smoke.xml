@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Smoke tests suite">
-<parameter name="environment" value ="local"></parameter>
-  <test name="MainPage smoke tests in FF browser">
-         <parameter name="browserName" value ="chrome"></parameter>
-         <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
-	    <!-- <parameter name="host" value ="192.168.0.106"></parameter>
-	     <parameter name="port" value ="4444"></parameter> -->
+<suite name="Smoke tests suite" parallel="tests" thread-count="2">
+<parameter name="environment" value ="grid"></parameter>
+  <test name="MainPage smoke tests in LINUX - Chrome browser">
+      <parameter name="platform" value ="LINUX"></parameter>
+      <parameter name="browserName" value ="chrome"></parameter>
+      <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
   <groups>
 	<define name="all">
 		<include name="mainPageSmoke"></include>
