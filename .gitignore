@@ -7,3 +7,11 @@ Airbnb-java-selenium-testng.iml
 README.md
 target
 out
+out/production
+out/production/main
+target/classes
+target/generated-sources
+target/libs
+target/maven-archiver
+target/maven-status
+target/test-classes
