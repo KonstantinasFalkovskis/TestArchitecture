@@ -7,14 +7,14 @@ WORKDIR /usr/share/tests
 
 # ADD .jar under target from host
 # into this image
-ADD target/Airbnb-java-selenium-testng-build.jar 			Airbnb-java-selenium-testng-build.jar
-ADD target/Airbnb-java-selenium-testng-build-sources.jar 	Airbnb-java-selenium-testng-build-sources.jar
-ADD target/Airbnb-java-selenium-testng-build-tests.jar 	    Airbnb-java-selenium-testng-build-tests.jar
-ADD target/libs						                    	libs
+ADD target/selenium-docker.jar 			selenium-docker.jar
+ADD target/selenium-docker-sources.jar 	selenium-docker-sources.jar
+ADD target/selenium-docker-tests.jar 	selenium-docker-tests.jar
+ADD target/libs						    libs
 
 # in case of any other dependency like .csv / .json / .xls / .properties
 # please ADD that as well
-ADD src/main/java/data/data.xlsx              data.xlsx
+ADD src/main/java/data/data.xlsx        data.xlsx
 
 # ADD suite files
 ADD test-functional.xml				test-functional.xml
@@ -30,4 +30,4 @@ ADD healthcheck.sh                  healthcheck.sh
 # MODULE
 
 #ENTRYPOINT sh healthcheck.sh
-ENTRYPOINT java -cp Airbnb-java-selenium-testng-build.jar:Airbnb-java-selenium-testng-build-sources.jar:Airbnb-java-selenium-testng-build-tests.jar:libs/* org.testng.TestNG $MODULE
+ENTRYPOINT java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG $MODULE

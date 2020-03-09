@@ -1,12 +1,5 @@
 package base;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,9 +8,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-
 import utils.Util;
 import utils.WebEventListener;
+
+import java.net.MalformedURLException;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class Base {
 	
@@ -67,6 +63,8 @@ public class Base {
 		
 		setCurrentThreadName();
 		String testName = ctx.getCurrentXmlTest().getName();
+
+
 	}
 	
 	private void setCurrentThreadName() {
@@ -83,7 +81,7 @@ public class Base {
 	protected void tearDown() {
 		try {
 			System.out.println("[Closing session]");
-			driver.quit();
+			this.driver.quit();
 		} catch(Exception e) {
 			System.out.println("ERROR: " + e);
 		}
