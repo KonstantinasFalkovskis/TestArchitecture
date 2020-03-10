@@ -4,9 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import utils.Util;
 import utils.WebEventListener;
@@ -36,11 +35,11 @@ public class Base {
 //		}
 	}
 
-	@BeforeMethod(alwaysRun = true)
+	@BeforeClass(alwaysRun = true)
 	@Parameters({"environment","platform","browserName","url"})
 	//@Parameters({"environment","platform","browserName","url"})
-	public void selectRunningSource(@Optional("local") String environment, @Optional("ANY") String platform, @Optional("chrome") String browserName, String url, ITestContext ctx) throws MalformedURLException {
-		
+//	public void selectRunningSource(@Optional("local") String environment, @Optional("ANY") String platform, @Optional("chrome") String browserName, String url, ITestContext ctx) throws MalformedURLException {
+		public void selectRunningSource(String environment, String platform, String browserName, String url, ITestContext ctx) throws MalformedURLException {
 		BrowserFactory factory = new BrowserFactory(browserName);
 		if(environment.equals("grid")) {
 				driver = factory.parallelRun(environment,platform,browserName,url);
@@ -54,7 +53,7 @@ public class Base {
 		driver = e_driver;
 		
 		
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(Util.PAGE_LOAD_WAIT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Util.IMPLICIT_WAIT, TimeUnit.SECONDS);
@@ -77,7 +76,7 @@ public class Base {
 		}
 	}
 	
-	@AfterMethod(alwaysRun = true)
+	@AfterClass(alwaysRun = true)
 	protected void tearDown() {
 		try {
 			System.out.println("[Closing session]");

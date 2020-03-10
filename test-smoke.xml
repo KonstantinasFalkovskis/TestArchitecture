@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Smoke tests suite" parallel="tests" thread-count="2">
 <parameter name="environment" value ="grid"></parameter>
-  <test name="MainPage smoke tests in LINUX - Chrome browser">
+  <test name="MainPage smoke tests in LINUX - Firefox browser">
       <parameter name="platform" value ="LINUX"></parameter>
-      <parameter name="browserName" value ="chrome"></parameter>
+      <parameter name="browserName" value ="firefox"></parameter>
       <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
   <groups>
 	<define name="all">

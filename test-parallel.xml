@@ -22,7 +22,7 @@
 	    </classes>
   </test>
  
-  <test name="Parallel tests for SMOKE in Linux - Firefox browser">
+  <test name="Parallel tests for SMOKE in LINUX - Firefox browser">
 		  <parameter name="platform" value ="LINUX"></parameter>
 	      <parameter name="browserName" value ="firefox"></parameter>
 	      <parameter name="url" value ="https://www.airbnb.com/?locale=en"></parameter>
