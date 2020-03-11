@@ -30,5 +30,5 @@ ADD healthcheck.sh                  healthcheck.sh
 # HUB_HOST
 # MODULE
 
-#ENTRYPOINT sh healthcheck.sh
-ENTRYPOINT java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG $MODULE
+ENTRYPOINT sh healthcheck.sh
+#ENTRYPOINT java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG $MODULE
