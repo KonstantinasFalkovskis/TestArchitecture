@@ -16,12 +16,12 @@ do
 	sleep 1
 done
 
-# start the java command
-java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests \
-selenium-docker-tests.jar:libs/* \
-   # -Dhub=$hub \
-   # -Dport=$port \
-   # -Denvironment=$environment \  #need to investigate is Local testing needed or not. If not remove ENV -param
-   # -Dplatfrom=$platform \  #needed if another mashines - slaves are using in testing
-   # -DbrowserName=$browserName \
-    org.testng.TestNG $MODULE
+java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG $MODULE
+## start the java command
+#java -cp selenium-docker.jar:selenium-docker-sources.jar:selenium-docker-tests.jar:libs/* \
+#   # -Dhub=$hub \
+#   # -Dport=$port \
+#   # -Denvironment=$environment \  #need to investigate is Local testing needed or not. If not remove ENV -param
+#   # -Dplatfrom=$platform \  #needed if another mashines - slaves are using in testing
+#   # -DbrowserName=$browserName \
+#    org.testng.TestNG $MODULE
