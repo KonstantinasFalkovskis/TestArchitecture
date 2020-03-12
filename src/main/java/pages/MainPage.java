@@ -27,7 +27,7 @@ public class MainPage extends Base{
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	Actions builder = new Actions(driver);
 
-	String path = "/usr/home/workspace/airbnb/TestArchitecture/data.xlsx";
+	//String path = "/usr/home/workspace/airbnb/TestArchitecture/data.xlsx";
 	//-------------------------------------------------------->	
 	@FindBy(xpath = "//input[@id='Koan-magic-carpet-koan-search-bar__input']")
 	WebElement placeToGo;
@@ -141,11 +141,11 @@ public class MainPage extends Base{
 
 	@Step("File Upload")
 	@Description("Method for file uploading")
-	public void uploadFile(String path){
-		if(driver instanceof RemoteWebDriver){
+	public void uploadFile(String path) {
+		if (driver instanceof RemoteWebDriver) {
 			((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
 		}
-		this.fileUpload.sendKeys(this.path);
+		this.fileUpload.sendKeys(path);
 		this.uploadBtn.click();
 		wait.until(visibilityOfElementLocated(By.id("uploaded-files")));
 	}

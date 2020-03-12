@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.awaitility.Awaitility;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -15,6 +16,7 @@ import utils.Util;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 
 @Listeners({TestAllureListener.class})
@@ -69,8 +71,8 @@ public class MainPageTest extends Base{
 	@Story("Story name: To validate file uploading on the Main page")
 	public void uploadTest() throws InterruptedException {
 		mainPage = new MainPage();
-		mainPage.uploadFile("data.xlsx");
-		Assert.assertEquals("sample.xlsx", mainPage.getUploadedFileName());
+		mainPage.uploadFile("/usr/home/workspace/airbnb/TestArchitecture/data.xlsx");
+		Assert.assertEquals("data.xlsx", mainPage.getUploadedFileName());
 	}
 
     @Test(priority = 6, enabled = false, groups = {"mainPageFunc"})
@@ -81,11 +83,14 @@ public class MainPageTest extends Base{
 	    mainPage.downloadFile();
         Path downloadsPath = Paths.get("/mnt/volume/output/downloads/testfile.txt");
 
-//        Awaitility.await()
-//                .atMost(1, TimeUnit.MINUTES)
-//                .until(() -> {
-//                   return downloadsPath.toFile().exists();
-//                });
+        Awaitility.await()
+				.atMost(2, TimeUnit.MINUTES)          // max wait
+				.ignoreExceptions()
+				.pollDelay(5, TimeUnit.SECONDS)        // do not check immediately - wait for 5 seconds for the first time
+				.pollInterval(10, TimeUnit.SECONDS)    // check every 10 seconds
+				.until(() -> {
+					return downloadsPath.toFile().exists();
+                });
         Assert.assertTrue(downloadsPath.toFile().exists());
     }
 

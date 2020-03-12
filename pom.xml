@@ -177,5 +177,15 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.14</version>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility-proxy</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
 </project>
