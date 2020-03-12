@@ -32,6 +32,10 @@ public class BrowserFactory {
 	public static synchronized WebDriver getDriver() {
 		return tdriver.get();
 	}
+	public boolean isRemoteDriver() {
+		String remoteProperty = System.getProperty("remoteDriver");
+		return remoteProperty != null && Boolean.parseBoolean(remoteProperty);
+	}
 
 		public WebDriver initialization(String browserName) {
 			System.out.println("Starting " + browserName + " locally");
@@ -140,16 +144,11 @@ public class BrowserFactory {
 
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLWin), caps));
 				//tdriver.set(new RemoteWebDriver(new URL(hubURLMac), caps));
-				this.tdriver.set(new RemoteWebDriver(new URL(hubURLLinux), caps));
+				tdriver.set(new RemoteWebDriver(new URL(hubURLLinux), caps));
 				//tdriver.set(new RemoteWebDriver(new URL(remoteUrl), caps));
-
-				// set local file detector for uploading file
-				//tdriver.setFileDetector(new LocalFileDetector());
-				//return tdriver.get();
-
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
-			return this.tdriver.get();
+			return tdriver.get();
 	}
 }

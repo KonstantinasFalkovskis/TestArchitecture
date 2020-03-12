@@ -10,6 +10,9 @@ import org.testng.annotations.Parameters;
 import utils.Util;
 import utils.WebEventListener;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -23,16 +26,16 @@ public class Base {
 	public WebEventListener eventListener;
 	
 	public Base() {
-//		try {
-//			prop = new Properties();
-//					FileInputStream file = new FileInputStream(System.getProperty("user.dir")
-//					+ "/src/main/java/config/config.properties");
-//			prop.load(file);
-//		} catch(FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch(IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			prop = new Properties();
+					FileInputStream file = new FileInputStream(System.getProperty("user.dir")
+					+ "/config.properties");
+			prop.load(file);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@BeforeClass(alwaysRun = true)

@@ -1,19 +1,23 @@
 package pages;
 
-import java.util.List;
+import base.Base;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
-import base.Base;
-import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import utils.ClickUtils;
+
+import java.util.List;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class MainPage extends Base{
 	
@@ -22,7 +26,8 @@ public class MainPage extends Base{
 	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	Actions builder = new Actions(driver);
-	
+
+	String path = "/usr/home/workspace/airbnb/TestArchitecture/data.xlsx";
 	//-------------------------------------------------------->	
 	@FindBy(xpath = "//input[@id='Koan-magic-carpet-koan-search-bar__input']")
 	WebElement placeToGo;
@@ -116,12 +121,48 @@ public class MainPage extends Base{
 	WebElement closeBtnForLogin;
 	
 	@FindBy(xpath = "//button[@class='_98kere2']")
-	WebElement helpCloseBtn; 
-	
+	WebElement helpCloseBtn;
+
+	@FindBy(id = "file-upload")
+	WebElement fileUpload;
+
+	@FindBy(id = "file-submit")
+	WebElement uploadBtn;
+
+	@FindBy(id = "uploaded-files")
+	WebElement uploadedFileName;
+
+    @FindBy(linkText = "testfile.txt")
+    WebElement downloadFile;
+
 	public MainPage() {
 		PageFactory.initElements(driver, this);
 	}
-	
+
+	@Step("File Upload")
+	@Description("Method for file uploading")
+	public void uploadFile(String path){
+		if(driver instanceof RemoteWebDriver){
+			((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
+		}
+		this.fileUpload.sendKeys(this.path);
+		this.uploadBtn.click();
+		wait.until(visibilityOfElementLocated(By.id("uploaded-files")));
+	}
+
+ 	//once the upload is success, get the name of the file uploaded
+    @Step("Uploaded file name")
+    @Description("Method for get name of the uploaded file")
+	public String getUploadedFileName(){
+		return this.uploadedFileName.getText().trim();
+	}
+
+    @Step("File downloading")
+    @Description("Method for file downloading")
+    public void downloadFile() {
+        this.downloadFile.click();
+    }
+
 	@Description("Method page title getting")
 	public void test() {
 		driver.getTitle();

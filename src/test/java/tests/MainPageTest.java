@@ -1,17 +1,20 @@
 package tests;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
 import base.Base;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 import pages.MainPage;
 import utils.TestAllureListener;
 import utils.Util;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 @Listeners({TestAllureListener.class})
@@ -19,7 +22,7 @@ public class MainPageTest extends Base{
 	
 	MainPage mainPage;
 	String sheetName = "search";
-		
+
 	@Test(priority = 1, enabled = true, groups = {"mainPageSmoke"}, description = "Verifying main page menu")
 	@Severity(SeverityLevel.NORMAL)
 	@Description("Test case description : verifying menu on the Main Page")
@@ -59,7 +62,34 @@ public class MainPageTest extends Base{
 		mainPage = new MainPage();
 		mainPage.mainPageSearchModulRegression(shortname, destination, checkin, checkout);
 	}
-	
+
+	@Test(priority = 5, enabled = false, groups = {"mainPageFunc"})
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Test case description: upload file on Main Page")
+	@Story("Story name: To validate file uploading on the Main page")
+	public void uploadTest() throws InterruptedException {
+		mainPage = new MainPage();
+		mainPage.uploadFile("data.xlsx");
+		Assert.assertEquals("sample.xlsx", mainPage.getUploadedFileName());
+	}
+
+    @Test(priority = 6, enabled = false, groups = {"mainPageFunc"})
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test case description: download file from Main Page")
+    @Story("Story name: To validate file downloading from the Main page")
+	public void downloadTest() throws InterruptedException {
+	    mainPage.downloadFile();
+        Path downloadsPath = Paths.get("/mnt/volume/output/downloads/testfile.txt");
+
+//        Awaitility.await()
+//                .atMost(1, TimeUnit.MINUTES)
+//                .until(() -> {
+//                   return downloadsPath.toFile().exists();
+//                });
+        Assert.assertTrue(downloadsPath.toFile().exists());
+    }
+
+
 	/**
 	 * Data provider
 	 * @return
